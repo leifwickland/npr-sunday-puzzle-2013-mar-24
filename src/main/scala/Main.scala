@@ -3,9 +3,8 @@
  * @link http://en.wikipedia.org/wiki/Word_square
  */
 case class Square(words: Seq[String]) extends AnyVal {
-  def add(word: String): Option[Square] = {
-    val l = words.length
-    if (words.zipWithIndex.forall { case (w, i) => w(l) == word(i) }) Option(Square(words :+ word))
+  def add(newWord: String): Option[Square] = {
+    if (words.zipWithIndex.forall { case (word, i) => word(words.length) == newWord(i) }) Option(Square(words :+ newWord))
     else None
   }
   override def toString = ("Square(" +: words :+ ")").mkString("\n")
