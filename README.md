@@ -1,19 +1,2 @@
-scala-project-shell
+npr-sunday-puzzle-2013-mar-24
 ====================
-
-A good place to start for a quick 'n' dirty scala program.
-
-Create a [new repo](https://github.com/new) named $newproj. Then:
-
-    export newproj=repo-name
-
-And finally paste the rest:
-
-    git clone git@github.com:leifwickland/scala-project-shell.git $newproj
-    cd $newproj
-    git remote rm origin
-    echo -e "$newproj\n====================" > README.md
-    git add README.md
-    git ci -m "Set project name"
-    git remote add origin git@github.com:leifwickland/$newproj.git
-    git push -u origin master
