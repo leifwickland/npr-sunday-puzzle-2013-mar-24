@@ -1,22 +1,54 @@
+import scala.collection.GenSeq
+import scala.collection.parallel.ForkJoinTaskSupport
+import scala.concurrent.forkjoin.ForkJoinPool
+
 /**
  * Word Square Solver
  * @link http://en.wikipedia.org/wiki/Word_square
  */
 case class Square(words: Seq[String]) extends AnyVal {
-  def add(newWord: String): Option[Square] = {
-    if (words.zipWithIndex.forall { case (word, i) => word(words.length) == newWord(i) }) Option(Square(words :+ newWord))
-    else None
+  def add(newWord: String): Seq[Square] = {
+    val n = words.length
+    if (words.iterator.zipWithIndex.forall { case (word, i) => word(n) == newWord(i) }) Seq(Square(words :+ newWord))
+    else Nil
   }
   override def toString = ("Square(" +: words :+ ")").mkString("\n")
 }
 
 object Square {
   final val Empty = Square(Seq())
-  def place(toPlace: List[List[String]], square: Square = Empty): Seq[Square] = {
+
+  def place(toPlace: List[Seq[String]]): Seq[Square] = {
+    val reversed = toPlace.map(_.map(_.reverse.toLowerCase)).reverse
+    val result = place(reversed, Empty)
+    result.map(s => Square(s.words.map(_.reverse).reverse))
+  }
+  private def place(toPlace: List[Seq[String]], square: Square): Seq[Square] = {
+    val finished = new java.util.concurrent.atomic.AtomicInteger(0)
     toPlace match {
-      case Nil => Seq(square)
-      case words :: more => words.flatMap(word => square.add(word).toSeq.flatMap(newSquare => place(more, newSquare)))
+      case first :: rest =>
+        val par = first.par
+        par.tasksupport = new ForkJoinTaskSupport(new ForkJoinPool(64))
+        par.flatMap { word =>
+          val result = place0(rest, square.add(word).head)
+          val n = finished.incrementAndGet
+          println(s"Finished on #$n of ${first.size} ${word.reverse} at ${new java.util.Date}.")
+          result
+        }.toIndexedSeq
+      case _ => throw new IllegalArgumentException("Look deeper")
     }
+  }
+  private def place0(toPlace: List[GenSeq[String]], square: Square): Seq[Square] = {
+    val r = toPlace match {
+      case Nil => println("FOUND!"); println(square); Seq(square)
+      case words :: more => words.flatMap { word =>
+        square.add(word).
+          flatMap {
+            newSquare => place0(more, newSquare)
+          }
+      }
+    }
+    r.toIndexedSeq
   }
 }
 
@@ -25,21 +57,27 @@ object Square {
  */
 object Main {
   def main(args: Array[String]) {
-    val solutions = Square.place(List(
-      middleN,
-      middleA,
-      middleS,
-      middleA,
-      middleL))
+    val words = if (args.size == 0) {
+      List(
+        middleN,
+        middleA,
+        middleS,
+        middleA,
+        middleL)
+    } else {
+      val file = scala.io.Source.fromFile(args(0)).getLines.filter(_.nonEmpty).toSeq
+      List.fill(file.head.length)(file)
+    }
+    val solutions = Square.place(words)
     solutions.foreach { s => println(s); println() }
   }
 
-  def stringToList(s: String): List[String] = s.stripMargin.split(Array(' ', '\n')).toList.filter(_.nonEmpty)
+  def stringToSeq(s: String): Seq[String] = s.stripMargin.split(Array(' ', '\n')).filter(_.nonEmpty)
 
   def middleS = List("nasal")
 
   // From http://www.visca.com/regexdict/
-  def middleN = stringToList("""
+  def middleN = stringToSeq("""
     |amnia
     |annex
     |annoy
@@ -335,7 +373,7 @@ object Main {
     |zonal
     |""")
 
-  def middleL = stringToList("""
+  def middleL = stringToSeq("""
     |aglet
     |agley
     |aglow
@@ -590,7 +628,7 @@ object Main {
     |zilch
     |""")
 
-  def middleA = stringToList("""
+  def middleA = stringToSeq("""
     |abaca
     |abaci
     |aback
