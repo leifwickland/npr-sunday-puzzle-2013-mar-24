@@ -6,24 +6,29 @@ import scala.concurrent.forkjoin.ForkJoinPool
  * Word Square Solver
  * @link http://en.wikipedia.org/wiki/Word_square
  */
-case class Square(words: Seq[String]) extends AnyVal {
-  def add(newWord: String): Seq[Square] = {
+case class Square(words: Seq[Utf8]) extends AnyVal {
+  def add(newWord: Utf8): Seq[Square] = {
     val n = words.length
-    if (words.iterator.zipWithIndex.forall { case (word, i) => word(n) == newWord(i) }) Seq(Square(words :+ newWord))
+    if (words.iterator.zipWithIndex.forall { case (word: Utf8, i: Int) => word(n) == newWord(i) }) Seq(Square(words :+ newWord))
     else Nil
   }
-  override def toString = ("Square(" +: words :+ ")").mkString("\n")
+  override def toString = ("Square(" +: words.map(_.toString) :+ ")").mkString("\n")
+  def toWords: Seq[String] = this.words.map((w: Utf8) => Utf8.utf8ToString(w))
 }
 
 object Square {
-  final val Empty = Square(Seq())
+  def fromStrings(words: Seq[String]): Square = {
+    Square(words.map(Utf8.apply))
+  }
+
+  final val Empty = Square(Seq[Utf8]())
 
   def place(toPlace: List[Seq[String]]): Seq[Square] = {
-    val reversed = toPlace.map(_.map(_.reverse.toLowerCase)).reverse
+    val reversed = toPlace.map(_.map(_.reverse.toLowerCase).map(Utf8.apply)).reverse
     val result = place(reversed, Empty)
     result.map(s => Square(s.words.map(_.reverse).reverse))
   }
-  private def place(toPlace: List[Seq[String]], square: Square): Seq[Square] = {
+  private def place(toPlace: List[Seq[Utf8]], square: Square): Seq[Square] = {
     val finished = new java.util.concurrent.atomic.AtomicInteger(0)
     toPlace match {
       case first :: rest =>
@@ -38,7 +43,7 @@ object Square {
       case _ => throw new IllegalArgumentException("Look deeper")
     }
   }
-  private def place0(toPlace: List[GenSeq[String]], square: Square): Seq[Square] = {
+  private def place0(toPlace: List[GenSeq[Utf8]], square: Square): Seq[Square] = {
     val r = toPlace match {
       case Nil => println("FOUND!"); println(square); Seq(square)
       case words :: more => words.flatMap { word =>
@@ -49,6 +54,21 @@ object Square {
       }
     }
     r.toIndexedSeq
+  }
+}
+
+case class Utf8(b: Array[Byte]) extends AnyVal {
+  def apply(i: Int): Byte = b(i)
+  override def toString: String = Utf8.utf8ToString(this)
+  def reverse: Utf8 = Utf8(this.toString.reverse)
+}
+object Utf8 {
+  def utf8ToString(u: Utf8): String = {
+    new String(u.b, Utf8.Charset)
+  }
+  final val Charset = java.nio.charset.Charset.forName("UTF-8")
+  def apply(s: String): Utf8 = {
+    Utf8(s.getBytes(Charset))
   }
 }
 

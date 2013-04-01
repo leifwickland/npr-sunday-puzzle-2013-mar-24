@@ -10,7 +10,7 @@ class MainTest extends FunSuite with ShouldMatchers {
       List("afar"),
       List("lava"),
       List("trap")
-    )) should be(Seq(Square(Seq("salt", "afar", "lava", "trap"))))
+    )).map(_.toWords) should be(Seq(Square.fromStrings(Seq("salt", "afar", "lava", "trap"))).map(_.toWords))
   }
 
   test("given 4 letter case with herrings") {
@@ -19,6 +19,6 @@ class MainTest extends FunSuite with ShouldMatchers {
       List("afar", "qewr"),
       List("lava", "zxcv"),
       List("trap", "pius")
-    )) should be(Seq(Square(Seq("salt", "afar", "lava", "trap"))))
+    )).head.toWords should be(Square.fromStrings(Seq("salt", "afar", "lava", "trap")).toWords)
   }
 }
