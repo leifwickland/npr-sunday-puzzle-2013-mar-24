@@ -40,653 +40,125 @@ object Main {
 
   // From http://www.visca.com/regexdict/
   def middleN = stringToList("""
-    |amnia
-    |annex
-    |annoy
-    |annul
-    |apnea
     |banal
-    |banco
     |bandy
-    |banjo
     |banns
-    |bench
-    |benne
-    |benny
-    |bento
-    |binal
-    |binge
-    |bingo
-    |boner
-    |boney
-    |bongo
-    |bonny
-    |bonus
-    |bonze
-    |bunch
-    |bunco
-    |bunko
-    |bunny
     |canal
     |candy
-    |canid
     |canna
     |canny
-    |canoe
-    |canon
-    |canto
-    |cense
-    |cento
-    |cinch
-    |conch
-    |condo
-    |coney
-    |conga
-    |conge
-    |conic
-    |conte
-    |cynic
-    |dance
     |dancy
     |dandy
-    |danio
-    |denar
-    |denim
-    |dense
-    |dinar
-    |diner
-    |dinge
-    |dingo
-    |dingy
-    |dinky
-    |donee
-    |donor
-    |donut
-    |dunce
-    |ennui
     |fancy
     |fanny
-    |fence
-    |fenny
-    |final
-    |finca
-    |finch
-    |finis
-    |finny
-    |fundi
-    |fungi
-    |fungo
-    |funky
-    |funny
-    |ganef
     |ganja
-    |ganof
-    |genet
-    |genic
-    |genie
-    |genii
-    |genip
-    |genoa
-    |genre
-    |genro
-    |genus
-    |ginzo
-    |gonad
-    |goner
-    |gonif
-    |gonzo
-    |gunny
     |handy
-    |hanse
-    |hence
-    |henna
-    |henry
-    |hinge
-    |hinny
-    |honan
-    |honey
-    |hongi
-    |honky
-    |honor
-    |hunch
-    |hunks
-    |hunky
-    |inner
-    |ionic
-    |jenny
-    |jingo
-    |jinni
-    |jones
-    |junco
-    |junky
-    |junta
-    |junto
-    |kanji
-    |kanzu
-    |kendo
-    |kente
-    |kinin
-    |kinky
-    |lanai
-    |lance
     |lanky
-    |lenis
-    |lento
-    |linac
-    |lindy
-    |linen
-    |liner
-    |linga
-    |lingo
-    |linin
-    |links
-    |loner
-    |lunar
-    |lunch
-    |lunge
-    |lungi
     |lynch
     |manat
-    |manes
-    |mange
-    |mango
     |mangy
-    |mania
-    |manic
     |manly
     |manna
-    |manor
-    |manse
     |manta
-    |manus
-    |mensa
-    |mensh
-    |minae
-    |mince
-    |miner
-    |mingy
-    |minim
-    |minor
-    |minus
-    |monad
-    |mondo
-    |money
-    |mongo
-    |monte
-    |month
-    |munch
     |nancy
     |nanny
-    |ninja
-    |ninny
-    |ninon
-    |ninth
-    |nonce
-    |nones
-    |nonet
-    |ounce
     |panda
     |pandy
-    |paned
-    |panel
-    |panic
-    |panne
     |pansy
     |panty
-    |penal
-    |pence
-    |penes
-    |penis
-    |penna
-    |penne
-    |penny
-    |pinch
-    |piney
-    |pingo
-    |pinko
-    |pinky
-    |pinna
-    |pinon
-    |pinot
-    |pinta
-    |pinto
-    |pinup
-    |punch
-    |punka
-    |punky
-    |punty
     |ranch
     |randy
-    |ranee
-    |range
     |rangy
-    |renal
-    |renew
-    |renin
-    |rinse
-    |rondo
-    |runic
-    |runny
     |sandy
-    |senna
-    |senor
-    |sense
-    |sente
-    |senti
-    |since
-    |sinew
-    |singe
-    |sinus
-    |sonar
-    |sonic
-    |sonny
-    |sunny
-    |sunup
     |synch
-    |synod
     |synth
-    |tango
     |tanka
     |tansy
-    |tench
-    |tendu
-    |tenet
-    |tenge
-    |tenia
-    |tenon
-    |tenor
-    |tense
-    |tenth
-    |tinct
-    |tinea
-    |tinge
-    |tinny
-    |tonal
-    |tondo
-    |toner
-    |toney
-    |tongs
-    |tonic
-    |tonne
-    |tonus
-    |tuner
-    |tunic
-    |tunny
-    |usnea
-    |venal
-    |venge
-    |venin
-    |venom
-    |venue
-    |vinca
-    |vinic
-    |vinyl
-    |wench
-    |wince
-    |winch
-    |windy
-    |winey
-    |winze
-    |wonky
-    |xenia
-    |xenon
-    |yenta
-    |zingy
-    |zonal
     |""")
 
   def middleL = stringToList("""
-    |aglet
-    |agley
-    |aglow
     |allay
-    |alley
-    |allot
-    |allow
-    |alloy
     |allyl
     |atlas
     |balas
     |balky
     |balmy
     |balsa
-    |belay
-    |belch
-    |belie
-    |belle
-    |belly
-    |below
-    |bilbo
-    |bilge
-    |billy
-    |bolus
-    |bulge
-    |bulky
-    |bulla
-    |bully
     |bylaw
-    |calif
-    |calix
     |calla
-    |calve
     |calyx
-    |celeb
-    |cella
-    |cello
-    |celom
-    |cilia
-    |colic
-    |colon
-    |color
-    |colza
-    |culch
-    |culet
-    |culex
-    |cully
-    |culti
     |dally
-    |delay
-    |delft
-    |dells
-    |delta
-    |delve
-    |dildo
-    |dilly
-    |dolce
-    |dolly
-    |dolma
-    |dolor
-    |dulse
-    |eclat
-    |false
-    |felid
-    |fella
-    |felly
-    |felon
-    |filar
-    |filch
-    |filet
-    |filly
-    |filmi
-    |filmy
-    |filth
-    |filum
-    |foley
-    |folia
-    |folio
-    |folky
-    |folly
-    |fully
     |galah
     |galax
-    |galea
-    |galop
-    |gelid
-    |golem
-    |golly
-    |gulag
-    |gular
-    |gulch
-    |gules
-    |gully
     |halal
-    |haler
-    |halon
-    |halve
-    |helix
-    |hello
-    |helot
-    |helve
-    |hilly
-    |hilum
-    |holey
-    |holly
-    |hullo
-    |igloo
-    |inlay
-    |inlet
-    |islet
     |jalap
-    |jelly
-    |jolly
-    |julep
-    |kelpy
-    |kilim
-    |kulak
-    |kylix
-    |lilac
-    |lolly
     |malar
-    |melee
-    |melic
-    |melon
-    |milch
-    |miler
-    |milia
-    |milky
-    |molal
-    |molar
-    |moldy
-    |molly
-    |molto
-    |mulch
-    |mulct
-    |muley
-    |naled
-    |nelly
-    |nylon
-    |oiled
-    |oiler
-    |onlay
-    |orlop
-    |owlet
-    |oxlip
-    |palea
     |pally
     |palmy
-    |palpi
     |palsy
-    |phlox
-    |pilaf
-    |pilar
-    |pilau
-    |piles
-    |pilot
-    |pilus
-    |polar
-    |poler
-    |polio
-    |polis
-    |polka
-    |polyp
-    |pulse
-    |pylon
     |rally
     |ralph
-    |relax
-    |relay
-    |relic
-    |riley
-    |ruler
     |salad
     |salal
-    |salep
-    |salic
     |sally
-    |salmi
-    |salol
-    |salon
     |salsa
     |salty
-    |salve
-    |salvo
-    |selah
-    |selva
-    |shlep
-    |shlub
-    |silex
-    |silky
-    |silly
-    |silva
-    |solan
-    |solar
-    |soles
-    |solid
-    |solon
-    |solum
-    |solus
-    |solve
     |splat
     |splay
-    |split
-    |sulfa
-    |sulky
-    |sully
     |sylph
     |sylva
-    |taler
-    |tales
     |talky
     |tally
-    |talon
-    |talus
-    |telco
-    |telex
-    |telic
-    |telly
-    |telos
-    |tilde
-    |tiler
-    |tilth
-    |tolar
-    |tolyl
-    |tulip
-    |tulle
-    |uhlan
-    |unlay
-    |valet
-    |valid
-    |valor
-    |value
-    |valve
-    |velar
-    |veldt
-    |velum
-    |villa
-    |villi
-    |volar
-    |volte
-    |volva
-    |vulva
     |walla
     |waltz
-    |welch
-    |welsh
-    |wilco
     |xylan
-    |xylem
-    |xylol
-    |yulan
-    |zilch
     |""")
 
   def middleA = stringToList("""
     |abaca
-    |abaci
     |aback
     |abaft
-    |abase
     |abash
-    |abate
     |abaya
-    |acari
-    |adage
     |adapt
-    |again
     |agama
-    |agape
-    |agate
-    |agave
     |alack
-    |alamo
     |alarm
     |alary
-    |alate
     |amass
-    |amaze
-    |apace
     |apart
-    |arame
     |asana
-    |avail
     |avast
-    |await
-    |awake
     |award
-    |aware
     |awash
-    |beach
-    |beady
-    |beamy
-    |beano
-    |beard
-    |beast
-    |beaut
-    |beaux
     |bhang
-    |bialy
     |black
-    |blade
     |blaff
-    |blain
-    |blame
     |bland
     |blank
-    |blare
-    |blase
     |blast
-    |blaze
-    |board
-    |boast
-    |brace
     |bract
-    |braid
-    |brail
-    |brain
-    |brake
     |brand
     |brank
     |brant
     |brash
     |brass
     |brava
-    |brave
-    |bravo
     |brawl
     |brawn
-    |braze
     |bwana
-    |cease
-    |chafe
     |chaff
-    |chain
-    |chair
     |chalk
     |champ
     |chant
-    |chaos
-    |chape
     |chaps
     |chard
     |charm
     |charr
     |chart
     |chary
-    |chase
     |chasm
     |clack
-    |clade
-    |claim
     |clamp
     |clang
     |clank
@@ -695,252 +167,93 @@ object Main {
     |clasp
     |class
     |clast
-    |clave
-    |coach
-    |coast
-    |coati
     |crack
     |craft
-    |crake
     |cramp
-    |crane
     |crank
-    |crape
     |craps
     |crash
     |crass
-    |crate
-    |crave
     |crawl
-    |craze
     |crazy
-    |dealt
-    |death
-    |diary
-    |diazo
     |draft
-    |drain
-    |drake
     |drama
     |drank
-    |drape
     |drawl
     |drawn
     |dwarf
-    |eland
-    |elate
-    |enact
-    |enate
-    |epact
-    |erase
-    |evade
-    |exact
-    |exalt
-    |feast
     |flack
-    |flail
-    |flair
-    |flake
     |flaky
-    |flame
     |flamy
     |flank
-    |flare
     |flash
     |flask
     |flaxy
-    |foamy
-    |frail
-    |frame
     |franc
     |frank
     |frass
-    |fraud
-    |ghazi
-    |giant
-    |glace
-    |glade
-    |glair
     |gland
     |glans
-    |glare
     |glary
     |glass
-    |glaze
     |gnarl
     |gnarr
     |gnash
-    |grace
-    |grade
     |graft
-    |grail
-    |grain
     |grama
     |gramp
     |grams
     |grana
     |grand
     |grant
-    |grape
     |graph
     |grasp
     |grass
-    |grate
-    |grave
     |gravy
-    |graze
-    |guano
-    |guard
-    |guava
-    |heady
-    |heart
-    |heath
-    |heave
-    |heavy
-    |hoard
-    |hoary
-    |image
-    |imago
-    |inane
-    |inapt
-    |irate
-    |khaki
-    |kiack
-    |kiang
     |knack
-    |knave
-    |koala
     |kraal
     |kraft
-    |krait
-    |kraut
     |kvass
     |kyack
-    |laari
-    |leach
-    |leafy
-    |leaky
-    |leant
-    |leapt
-    |learn
-    |lease
-    |leash
-    |least
-    |leave
-    |liana
     |llama
-    |llano
-    |loach
-    |loath
-    |lyase
-    |mealy
-    |meant
-    |meaty
-    |neath
     |nyala
-    |okapi
-    |orach
-    |orang
-    |orate
-    |ovary
-    |ovate
-    |peace
-    |peach
-    |pearl
-    |pease
-    |phage
-    |phase
-    |piano
-    |place
-    |plage
-    |plaid
-    |plain
-    |plait
-    |plane
     |plank
     |plant
     |plash
     |plasm
-    |plate
     |platy
     |playa
     |plaza
-    |poach
-    |prahu
     |prang
     |prank
-    |prase
-    |prate
     |prawn
     |psalm
-    |quack
-    |quaff
-    |quail
-    |quake
-    |quale
-    |qualm
-    |quant
-    |quark
-    |quart
-    |quash
-    |quasi
-    |reach
-    |react
-    |ready
-    |reais
-    |realm
-    |rearm
-    |reata
-    |reave
-    |riant
-    |riata
-    |roach
-    |roast
-    |ruana
     |scald
-    |scale
     |scall
     |scalp
     |scaly
     |scamp
     |scant
-    |scape
-    |scare
     |scarf
     |scarp
     |scary
-    |scaup
-    |seamy
     |shack
-    |shade
     |shady
     |shaft
-    |shake
-    |shako
     |shaky
-    |shale
-    |shame
     |shank
-    |shape
     |shard
-    |share
     |shark
     |sharp
-    |shave
     |shawl
     |shawm
     |skald
     |skank
-    |skate
     |slack
-    |slain
-    |slake
     |slang
     |slant
     |slash
-    |slate
     |slaty
-    |slave
     |smack
     |small
     |smalt
@@ -948,36 +261,19 @@ object Main {
     |smart
     |smash
     |snack
-    |snafu
-    |snail
-    |snake
     |snaky
-    |snare
     |snarf
     |snarl
-    |soapy
-    |soave
-    |space
     |spacy
-    |spade
-    |spake
     |spall
     |spang
     |spank
-    |spare
     |spark
     |spasm
-    |spate
     |spawn
     |stack
     |staff
-    |stage
     |stagy
-    |staid
-    |stain
-    |stair
-    |stake
-    |stale
     |stalk
     |stall
     |stamp
@@ -985,70 +281,31 @@ object Main {
     |stang
     |stank
     |staph
-    |stare
     |stark
     |start
     |stash
-    |state
-    |stave
-    |suave
-    |swage
-    |swain
-    |swale
-    |swami
     |swamp
     |swank
     |sward
-    |sware
     |swarf
     |swarm
     |swart
     |swash
     |swath
-    |teach
-    |teary
-    |tease
-    |thane
     |thank
-    |tiara
-    |toady
-    |toast
-    |trace
     |track
     |tract
-    |trade
-    |tragi
-    |trail
-    |train
-    |trait
     |tramp
     |trash
     |trass
-    |trave
     |trawl
-    |tsade
-    |twain
     |twang
-    |ukase
-    |ulama
-    |unapt
-    |unarm
-    |urase
-    |urate
-    |usage
-    |vealy
-    |viand
-    |weald
-    |weary
-    |weave
     |whack
-    |whale
     |whang
     |wharf
     |wrack
     |wrapt
     |wrath
-    |yearn
-    |yeast""")
+    |""")
 }
 
